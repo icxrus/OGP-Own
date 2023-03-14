@@ -23,6 +23,10 @@ public class FallOffChecker : MonoBehaviour
         {
             fallOffCounter += 1;
             UpdateText();
+            other.gameObject.GetComponent<CharacterController>().enabled = false;
+            other.gameObject.transform.position = Vector3.zero;
+            other.gameObject.GetComponent<CharacterController>().enabled = true;
+
         }
     }
 
