@@ -57,5 +57,6 @@ public class PlayerSpawner : MonoBehaviour
     private void OnClientDisconnectedCallback(ulong clientID)
     {
         connectedNUM -= 1;
+
     }
 }

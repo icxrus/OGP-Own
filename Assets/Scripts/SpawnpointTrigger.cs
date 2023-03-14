@@ -10,7 +10,7 @@ public class SpawnpointTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && go == null)
         {
             if (go != null && go.transform.parent.CompareTag("Player"))
             {
