@@ -53,6 +53,7 @@ public class NetworkCommands : MonoBehaviour
 
     public void DisconnectFromServer()
     {
+        GetComponent<PlayerSpawner>().StopListener();
         NetworkManager.Singleton.Shutdown();
         disconnectButton.gameObject.SetActive(false);
         startHostButton.gameObject.SetActive(true);

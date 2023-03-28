@@ -7,7 +7,7 @@ public class IsCollectable : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && NetworkManager.Singleton.IsServer)
         {
             gameObject.transform.parent = other.transform;
         }
