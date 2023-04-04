@@ -9,6 +9,11 @@ public class ButtonRpcScript : NetworkBehaviour
     public GameObject[] spawnPoints = new GameObject[4];
     private Vector3 currentSpawnpoint;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void SpawnClientPlayerServerRpc(ulong clientID, int spawnPosNumber)
     {
@@ -18,15 +23,6 @@ public class ButtonRpcScript : NetworkBehaviour
 
         GameObject goNew = new GameObject("" + spawnPosNumber);
         goNew.transform.parent = go.transform;
-    }
-
-    private GameObject SpawnPlayerHost() //Host spawning
-    {
-        GameObject go = Instantiate(playerPrefab, currentSpawnpoint, Quaternion.identity);
-        NetworkObject no = go.GetComponent<NetworkObject>();
-        no.SpawnAsPlayerObject(NetworkManager.Singleton.LocalClientId);
-
-        return go;
     }
 
     private GameObject SpawnPlayerClient(ulong clientID) //Client spawn with saved clientID variable
@@ -40,8 +36,4 @@ public class ButtonRpcScript : NetworkBehaviour
        
     }
 
-    private void DontDestroyOnLoad()
-    {
-        DontDestroyOnLoad();
-    }
 }

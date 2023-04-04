@@ -151,7 +151,7 @@ public class PlayerSpawner : MonoBehaviour
 
     }
 
-    private GameObject SpawnPlayerHost() //Host spawning
+    /*private GameObject SpawnPlayerHost() //Host spawning
     {
         GameObject go = Instantiate(playerPrefab, currentSpawnpoint, Quaternion.identity);
         NetworkObject no = go.GetComponent<NetworkObject>();
@@ -171,7 +171,7 @@ public class PlayerSpawner : MonoBehaviour
             return go;
         }
         return null;
-    }
+    }*/
 
     public void StopListener()
     {
