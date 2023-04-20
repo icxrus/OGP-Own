@@ -11,12 +11,21 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private int connectedNUM;
     [SerializeField] private GameObject spawnUI;
     private ulong clientID;
+    public GameObject rpc;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnUI.SetActive(false);
         NetworkManager.Singleton.OnServerStarted += OnServerStarted;
+        if (NetworkManager.Singleton.IsHost)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
+        }
+        else
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback2;
+        }
     }
 
     private void OnServerStarted()
@@ -39,7 +48,6 @@ public class PlayerSpawner : MonoBehaviour
                 spawnUI.SetActive(true);
 
             }
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
             //NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnectedCallback;
         }
     }
@@ -63,6 +71,14 @@ public class PlayerSpawner : MonoBehaviour
         }
     }
 
+    private void OnClientConnectedCallback2(ulong clientID)
+    {
+        if (clientID == NetworkManager.Singleton.LocalClientId)
+        {
+            spawnUI.SetActive(true);
+        }
+    }
+
     /*private void OnClientDisconnectedCallback(ulong clientID)
     {
         connectedNUM -= 1;
@@ -72,20 +88,25 @@ public class PlayerSpawner : MonoBehaviour
     //Setup spawnpoint with buttons
     public void SetSpawnPoint1()
     {
-        GameObject go;
-        currentSpawnpoint = spawnPoints[0].transform.position;
-        if (NetworkManager.Singleton.IsHost)
-            go = SpawnPlayerHost();
-        else
-            go = SpawnPlayerClient();
-
+        rpc.GetComponent<ButtonRpcScript>().SpawnClientPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 1);
         spawnUI.SetActive(false);
-        GameObject goNew = new GameObject("1");
-        goNew.transform.parent = go.transform;
+        /* GameObject go;
+         currentSpawnpoint = spawnPoints[0].transform.position;
+         if (NetworkManager.Singleton.IsHost)
+             go = SpawnPlayerHost();
+         else
+             go = SpawnPlayerClient();
+
+         spawnUI.SetActive(false);
+         GameObject goNew = new GameObject("1");
+         goNew.transform.parent = go.transform;*/
+
     }
     public void SetSpawnPoint2()
     {
-        GameObject go;
+        rpc.GetComponent<ButtonRpcScript>().SpawnClientPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
+        spawnUI.SetActive(false);
+        /*GameObject go;
         currentSpawnpoint = spawnPoints[1].transform.position;
         if (NetworkManager.Singleton.IsHost)
             go = SpawnPlayerHost();
@@ -94,11 +115,14 @@ public class PlayerSpawner : MonoBehaviour
 
         spawnUI.SetActive(false);
         GameObject goNew = new GameObject("2");
-        goNew.transform.parent = go.transform;
+        goNew.transform.parent = go.transform;*/
+
     }
     public void SetSpawnPoint3()
     {
-        GameObject go;
+        rpc.GetComponent<ButtonRpcScript>().SpawnClientPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 3);
+        spawnUI.SetActive(false);
+        /*GameObject go;
         currentSpawnpoint = spawnPoints[2].transform.position;
         if (NetworkManager.Singleton.IsHost)
             go = SpawnPlayerHost();
@@ -107,11 +131,14 @@ public class PlayerSpawner : MonoBehaviour
 
         spawnUI.SetActive(false);
         GameObject goNew = new GameObject("3");
-        goNew.transform.parent = go.transform;
+        goNew.transform.parent = go.transform;*/
+
     }
     public void SetSpawnPoint4()
     {
-        GameObject go;
+        rpc.GetComponent<ButtonRpcScript>().SpawnClientPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 4);
+        spawnUI.SetActive(false);
+        /*GameObject go;
         currentSpawnpoint = spawnPoints[3].transform.position;
         if (NetworkManager.Singleton.IsHost)
             go = SpawnPlayerHost();
@@ -120,10 +147,11 @@ public class PlayerSpawner : MonoBehaviour
 
         spawnUI.SetActive(false);
         GameObject goNew = new GameObject("4");
-        goNew.transform.parent = go.transform;
+        goNew.transform.parent = go.transform;*/
+
     }
 
-    private GameObject SpawnPlayerHost() //Host spawning
+    /*private GameObject SpawnPlayerHost() //Host spawning
     {
         GameObject go = Instantiate(playerPrefab, currentSpawnpoint, Quaternion.identity);
         NetworkObject no = go.GetComponent<NetworkObject>();
@@ -134,11 +162,22 @@ public class PlayerSpawner : MonoBehaviour
 
     private GameObject SpawnPlayerClient() //Client spawn with saved clientID variable
     {
-        GameObject go = Instantiate(playerPrefab, currentSpawnpoint, Quaternion.identity);
-        NetworkObject no = go.GetComponent<NetworkObject>();
-        no.SpawnAsPlayerObject(clientID);
+        if (NetworkManager.Singleton.IsServer)
+        {
+            GameObject go = Instantiate(playerPrefab, currentSpawnpoint, Quaternion.identity);
+            NetworkObject no = go.GetComponent<NetworkObject>();
+            no.SpawnAsPlayerObject(clientID);
 
-        return go;
+            return go;
+        }
+        return null;
+    }*/
+
+    public void StopListener()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectedCallback2;
     }
 
+    
 }

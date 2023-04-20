@@ -2615,6 +2615,7 @@ MonoBehaviour:
   collectablePrefab: {fileID: 3932229027807900534, guid: dcdb4cae6e64b3e4b9b4716f6f14a954,
     type: 3}
   scoreText: {fileID: 994114698}
+  networkManagerObject: {fileID: 1518984499}
 --- !u!65 &946549266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2856,6 +2857,7 @@ MonoBehaviour:
   collectablePrefab: {fileID: 3932229027807900534, guid: dcdb4cae6e64b3e4b9b4716f6f14a954,
     type: 3}
   scoreText: {fileID: 994114698}
+  networkManagerObject: {fileID: 1518984499}
 --- !u!65 &1004516433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3456,8 +3458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Client connection doesn't work for some reason, but the functions work
-    otherwise
+  m_text: Score 5 points to win the game!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3725,6 +3726,7 @@ MonoBehaviour:
   collectablePrefab: {fileID: 3932229027807900534, guid: dcdb4cae6e64b3e4b9b4716f6f14a954,
     type: 3}
   scoreText: {fileID: 994114698}
+  networkManagerObject: {fileID: 1518984499}
 --- !u!65 &1502577765
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3908,7 +3910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 191454683
+  GlobalObjectIdHash: 2344564075
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -3946,7 +3948,6 @@ MonoBehaviour:
   - {fileID: 1841668874}
   - {fileID: 946549263}
   - {fileID: 1502577762}
-  spawnUI: {fileID: 1868484068}
 --- !u!1 &1704431346
 GameObject:
   m_ObjectHideFlags: 0
@@ -4323,6 +4324,7 @@ MonoBehaviour:
   collectablePrefab: {fileID: 3932229027807900534, guid: dcdb4cae6e64b3e4b9b4716f6f14a954,
     type: 3}
   scoreText: {fileID: 994114698}
+  networkManagerObject: {fileID: 1518984499}
 --- !u!65 &1841668877
 BoxCollider:
   m_ObjectHideFlags: 0
